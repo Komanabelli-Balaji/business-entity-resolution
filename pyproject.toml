@@ -1,0 +1,7 @@
+[project]
+name = "business-entity-resolution"
+version = "0.1.0"
+description = "Business Entity Resolution Hackathon"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = []

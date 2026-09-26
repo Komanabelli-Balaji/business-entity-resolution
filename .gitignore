@@ -1,0 +1,31 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Datasets and actual data
+dataset/
+data/
+
+# Secrets and configs
+.env
+
+# Ignore outputs
+outputs/*
+!outputs/.gitkeep
+
+# Ignore data/artifacts in experiments but keep code/markdown
+experiments/*
+!experiments/**/*.py
+!experiments/**/*.ipynb
+!experiments/**/*.md
+!experiments/.gitkeep
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
