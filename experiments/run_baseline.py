@@ -17,7 +17,7 @@ import io
 
 S3_BUCKET = "hackathon-machines"
 S3_PREFIX = "entity-resolution/dataset/"
-OUTPUT_DIR = "/home/balaji/Projects/entity-resolution/business_entity_resolution/outputs"
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "outputs")
 
 s3 = boto3.client("s3", region_name="ap-south-1")
 
@@ -70,13 +70,13 @@ def main():
     
     # 1. Load Training Data
     print("\\n--- TRAINING PHASE ---")
-    train_s2 = load_and_normalize(os.path.join(DATA_DIR, "train", "train_source2.tsv"))
-    train_s3 = load_and_normalize(os.path.join(DATA_DIR, "train", "train_source3.tsv"))
-    train_gt = get_ground_truth(os.path.join(DATA_DIR, "train", "train_ground_truth.tsv"))
+    train_s2 = load_and_normalize("train/train_source2.tsv")
+    train_s3 = load_and_normalize("train/train_source3.tsv")
+    train_gt = get_ground_truth("train/train_ground_truth.tsv")
     
     # Load a sample of S1 for training (e.g., 50k rows)
     # We will split 40k for training, 10k for validation
-    train_s1_full = load_and_normalize(os.path.join(DATA_DIR, "train", "train_source1.tsv"))
+    train_s1_full = load_and_normalize("train/train_source1.tsv")
     s1_ids = list(train_s1_full['entity_id'])
     random.shuffle(s1_ids)
     
@@ -180,9 +180,9 @@ def main():
     
     # 2. Test Phase
     print("\\n--- TEST PHASE ---")
-    test_s2 = load_and_normalize(os.path.join(DATA_DIR, "test", "test_source2.tsv"))
-    test_s3 = load_and_normalize(os.path.join(DATA_DIR, "test", "test_source3.tsv"))
-    test_s1_full = load_and_normalize(os.path.join(DATA_DIR, "test", "test_source1.tsv"))
+    test_s2 = load_and_normalize("test/test_source2.tsv")
+    test_s3 = load_and_normalize("test/test_source3.tsv")
+    test_s1_full = load_and_normalize("test/test_source1.tsv")
     
     test_blocker = FrequencyBlocker(max_freq=500)
     test_blocker.fit_frequencies(test_s2)
